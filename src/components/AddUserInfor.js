@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 // class AddUserInfor extends React.Component {
 //     state = {
 //         name: '',
@@ -114,6 +115,8 @@ const AddUserInfor = (props) => {
                 />
                 <br></br>
                 <button>Submit</button>
-                )
+            </form>
+        </div>
+    )
 }
-                export default AddUserInfor
+export default AddUserInfor
