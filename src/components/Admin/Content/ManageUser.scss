@@ -1,0 +1,56 @@
+.manage-user-container {
+    padding: 10px;
+
+    .users-content {
+        .btn-add-new {
+            margin: 10px 0px;
+
+            button {
+                gap: 5px;
+            }
+
+        }
+
+    }
+
+    .title {
+        font-weight: 600;
+        font-size: 20px;
+    }
+}
+
+.modal-add-user {
+    .img-preview {
+        border: 1px dashed #ccc;
+        height: 150px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #ccc;
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+    }
+
+    .label-upload {
+        gap: 5px;
+        padding: 3px 8px;
+        align-items: center;
+        border: 1px solid red;
+        display: flex;
+        width: fit-content;
+        border-radius: 5px;
+        background: #c1a1a1cc;
+        border: none;
+        cursor: pointer;
+        font-size: 15px;
+
+        &:hover {
+            background-color: #ad5f5fcc;
+        }
+    }
+}

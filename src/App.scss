@@ -14,7 +14,7 @@ body {
   .container-lg,
   .container-md,
   .container-sm {
-    max-width: 1320px !important;
+    max-width: 1920px !important;
   }
 }
 
@@ -88,6 +88,7 @@ body {
         height: 40px;
         background: #303030;
         color: white;
+        border: none;
 
         &:hover {
           background: black;
@@ -105,6 +106,8 @@ video {
   bottom: 0;
   width: 100vw;
   height: fit-content;
+  // height: 100vh;
+
 }
 
 // .homePage-container {
