@@ -2,11 +2,23 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from 'react-icons/fc'
+import { toast } from 'react-toastify';
+import { postCreateNewUser } from '../../../apiService/apiService'
 import axios from 'axios';
 const ModelCreateUser = (props) => {
     const { show, setShow } = props;
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setShow(false);
+        setEmail("");
+        setPassword("");
+        setUsername("");
+        setRole("USER");
+        setImage("");
+        setPreviewImage("");
+
+
+    };
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
@@ -20,33 +32,61 @@ const ModelCreateUser = (props) => {
             setImage(event.target.files[0])
         }
     }
-    const handSubmitCreateUser = () => {
-        //validate
-
+    const handSubmitCreateUser = async () => {
+        alert("click me");
         //call API
-        // let data = {
-        //     email: email,
-        //     password: password,
-        //     username: username,
-        //     role: role,
-        //     userImage: image,
-        // }
+
         const data = new FormData();
         data.append('email', email);
         data.append('password', password);
         data.append('username', username);
         data.append('role', role);
-        data.append('email', email);
         data.append('userImage', image);
-        let res = axios.post('http://localhost:8081/api/v1/participant', data);
-        console.log("check res", res);
 
+        let res = await axios.post('http://localhost:8081/api/v1/participant', data)
+        console.log("check ress : ", res);
     }
+    const validateEmail = (email) => {
+        return String(email)
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+    };
+    // const handSubmitCreateUser = async () => {
+    //     //validate:
+    //     const isvalidEmail = validateEmail(email);
+    //     if (!isvalidEmail) {
+
+    //         toast.error('invalid email');
+    //         return;
+    //     }
+    //     if (!password) {
+    //         toast.error('invalid password');
+    //         return;
+    //     }
+    //     //submit data
+
+    //     const data = new FormData();
+    //     data.append('email', email);
+    //     data.append('password', password);
+
+
+
+    //     let res = await postCreateNewUser(email, password, username, role, image);
+    //     console.log("check >> res", res.data);
+    //     if (res.data && res.data.EC === 0) {
+    //         toast.success(res.data.EM);
+    //         handleClose();
+    //     }
+    //     if (res.data && res.data.EC !== 0) {
+    //         toast.error(res.data.EM);
+
+    //     }
+
+    // }
     return (
         <>
-            {/* <Button variant="primary" onClick={handleShow}>
-                Launch demo modal
-            </Button> */}
 
             <Modal
                 show={show}
