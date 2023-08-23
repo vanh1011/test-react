@@ -1,4 +1,4 @@
-import { logDOM } from "@testing-library/react"
+// import { logDOM } from "@testing-library/react"
 import './Login.scss';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -6,13 +6,14 @@ import { postLogin } from "../../apiService/apiService";
 import { toast } from 'react-toastify';
 import { useDispatch } from "react-redux";
 import { dologin } from "../../redux/action/userAction";
-
+import { ImSpinner10 } from "react-icons/im";
 const Login = (props) => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [isLoading, setIsloading] = useState(false);
     const validateEmail = (email) => {
         return String(email)
             .toLowerCase()
@@ -31,16 +32,20 @@ const Login = (props) => {
             toast.error('invalid password');
             return;
         }
+        setIsloading(true);
         // submit api
         let data = await postLogin(email, password);
         if (data && data.EC === 0) {
             dispatch(dologin(data))
             toast.success(data.EM);
-            navigate('/')
+            setIsloading(false);
+            // navigate('/')
         }
         // them dau + de chuyen stirng sang number 
         if (data && +data.EC !== 0) {
             toast.error(data.EM);
+            setIsloading(false);
+
         }
     }
     return (
@@ -80,7 +85,10 @@ const Login = (props) => {
                     <button
                         className="btn-submit"
                         onClick={() => handleLogin()}
-                    >Login to hoi dan it</button>
+                        disabled={isLoading}
+                    >
+                        {isLoading === true && <ImSpinner10 className="loader-icon" />}                        <span> Login </span>
+                    </button>
 
                 </div>
                 <div className=" text-center">

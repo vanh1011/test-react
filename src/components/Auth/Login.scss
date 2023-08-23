@@ -1,4 +1,33 @@
 .login-container {
+
+    @keyframes spin {
+        // from {
+        //     transform: scale(1) rolate(0deg);
+        // }
+
+        // to {
+        //     transform: scale(1) rolate(360deg);
+
+        // }
+        0% {
+            transform: translate3d(-50%, -50%, 0) rotate(0deg);
+        }
+
+        100% {
+            transform: translate3d(-50%, -50%, 0) rotate(360deg);
+        }
+    }
+
+    .loader-icon {
+        font-size: 14px;
+        margin-top: 8px;
+        margin-right: 5px;
+        color: #55a2eb;
+        animation: spin 1s infinite linear;
+    }
+
+
+
     .header {
         text-align: right;
         height: 45px;
@@ -53,11 +82,22 @@
             color: white;
             background: black;
 
+            &:disabled {
+                background: #dddddd;
+                color: #afafaf;
+                cursor: no-drop;
+            }
 
         }
 
         .back {
             cursor: pointer;
+        }
+
+        .btn-submit {
+            span {
+                margin-right: 38px;
+            }
         }
 
     }
